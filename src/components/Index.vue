@@ -2,6 +2,7 @@
   <div class="index container">
     <div class="card" v-for="sushi in sushis" :key="sushi.id">
       <div class="card-content">
+        <i class="material-icons delete" @click="deleteSushi(sushi.id)">delete</i>
         <h2 class="indigo-text">{{ sushi.title }}</h2>
         <ul class="ingredients">
           <li v-for="(ing, index) in sushi.ingredients" :key="index">
@@ -23,6 +24,13 @@ export default {
         {title: 'Avocado Roll', slug: 'avocado-roll', ingredients: ["Nori (seaweed)", "Sushi rice", "Avocado"], id: 2}
 
       ]
+    }
+  },
+  methods: {
+    deleteSushi(id){
+      this.sushis = this.sushis.filter(sushi => {
+        return sushi.id != id
+      })
     }
   }
 }
@@ -48,6 +56,15 @@ export default {
       .ingredients li{
          margin: 30px auto;
       }
+    }
+
+    .delete {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      cursor: pointer;
+      color: #aaa;
+      font-size: 1.4em;
     }
 
 }
