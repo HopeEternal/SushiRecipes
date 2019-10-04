@@ -1,4 +1,5 @@
 # sushi-recipes
+A VueJS Sushi Recipe collection!
 
 ## Project setup
 ```
