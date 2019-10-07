@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 import AddSushi from '@/components/AddSushi'
+import EditSushi from '@/components/EditSushi'
 
 Vue.use(Router)
 
@@ -10,12 +10,18 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: () => import(/* webpackChunkName: "about" */ './components/Index.vue')
+      component: () => import('./components/Index.vue')
     },
     {
       path: '/add-sushi',
       name: 'AddSushi',
-      component: () => import(/* webpackChunkName: "about" */ './components/AddSushi.vue')
+      component: AddSushi
+
+    },
+    {
+      path: '/edit-sushi/:sushi_slug',
+      name: 'EditSushi',
+      component: () => import('./components/EditSushi.vue')
 
     }
   ]
