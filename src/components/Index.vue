@@ -15,23 +15,40 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
+
 export default {
   name: 'Index',
   data () {
     return {
       sushis: [
-        {title: 'Futomaki', slug: 'futomaki', ingredients: ["Nori (seaweed)", "Sushi rice", "Tamagoyaki (egg)", "Kanpyo (gourd strips)", "Shiitake Mushrooms", "Spinach", "Cucumber", "Cooked unagi (eel)", "Sakura Denbu (Fish Flakes)"], id: 1},
-        {title: 'Avocado Roll', slug: 'avocado-roll', ingredients: ["Nori (seaweed)", "Sushi rice", "Avocado"], id: 2}
-
       ]
     }
   },
   methods: {
     deleteSushi(id){
-      this.sushis = this.sushis.filter(sushi => {
-        return sushi.id != id
+      //Delete doc from Firestore
+      db.collection('sushis').doc(id).delete()
+      .then(() => {
+        //Once Deleted from FireStore, remove from Array to update UI
+        this.sushis = this.sushis.filter(sushi => {
+          return sushi.id != id
+        })
       })
     }
+  },
+  created() {
+    // fetch data from the firestore
+    db.collection('sushis').get()
+    .then(snapshot =>
+    {
+      snapshot.forEach(doc => {
+        let sushi = doc.data()
+        sushi.id = doc.id
+        this.sushis.push(sushi)
+      })
+    })
+    
   }
 }
 </script>
