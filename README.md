@@ -1,5 +1,5 @@
-# sushi-recipes
-A VueJS Sushi Recipe collection!
+# VueJS Sushi-Recipes
+A VueJS Sushi Recipe collection! See me in action on Firebase: https://sushi-recipes-19628.web.app/#/
 
 ## Project setup
 ```
